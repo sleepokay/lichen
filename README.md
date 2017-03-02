@@ -1,5 +1,5 @@
 # Lichen Simulator
-!(https://github.com/sleepokay/lichen/blob/master/media/animation.gif)
+![](https://github.com/sleepokay/lichen/blob/master/media/animation.gif)
 
 A cellular automata model of lichen growth, written in [Processing 3](https://processing.org/). 
 
