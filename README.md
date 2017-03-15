@@ -12,3 +12,8 @@ Press space to pause
 Press 'S' to advance simulation by one step when paused
 Press 'V' to toggle vectors
 ```
+
+## To Do
+* Create web version of simulation using processing.js.
+* Implement waveform version of lichen growth.
+* Reference images.
