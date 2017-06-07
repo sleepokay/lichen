@@ -2,6 +2,7 @@
 int cellSize = 3;  // display size of cells in sq. pixels
 boolean saveFrame = false;  // save rendered frame as images
 boolean showVectors = true;
+boolean showCells = true;
 boolean noDeath = true;
 boolean paused = false;
 
@@ -15,7 +16,7 @@ int maxGrowth = 75;
 int growth = 0;
 
 // cell states
-static final float MAXSTATE = 20;
+static final float MAXSTATE = 10;
 static final float ALIVE = 1;
 static final float EMPTY = 0;
 
@@ -67,12 +68,14 @@ void draw() {
   background(0);
   
   // draw cells layer
-  noStroke();
-  for (int x = 0; x < width/cellSize; x++) {
-    for (int y = 0; y < height/cellSize; y++) {
-      if (cells[x][y].state > EMPTY) {
-        fill(color(0, 185 * cells[x][y].state / MAXSTATE + 70, 70 * cells[x][y].state / MAXSTATE + 50));     
-        rect (x*cellSize, y*cellSize, cellSize, cellSize);
+  if (showCells) {
+    noStroke();
+    for (int x = 0; x < width/cellSize; x++) {
+      for (int y = 0; y < height/cellSize; y++) {
+        if (cells[x][y].state > EMPTY) {
+          fill(color(0, 185 * cells[x][y].state / MAXSTATE + 70, 70 * cells[x][y].state / MAXSTATE + 50));     
+          rect (x*cellSize, y*cellSize, cellSize, cellSize);
+        }
       }
     }
   }
@@ -82,7 +85,7 @@ void draw() {
     for (int x = 0; x < width/cellSize; x++) {
       for (int y = 0; y < height/cellSize;y++) {
         if (cells[x][y].state > EMPTY) {
-          stroke(color(0, 155 * cells[x][y].state / MAXSTATE + 100, 50 * cells[x][y].state / MAXSTATE + 70));
+          stroke(color(0, 100 * cells[x][y].state / MAXSTATE + 155, 100 * cells[x][y].state / MAXSTATE + 70));
           int xCenter = x*cellSize + cellSize/2;
           int yCenter = y*cellSize + cellSize/2;
           line(xCenter, yCenter, xCenter + 12*cells[x][y].vector.x, yCenter + 12*cells[x][y].vector.y);
@@ -216,6 +219,9 @@ void keyPressed() {
     
   if (key == 'v' || key == 'V')
     showVectors = !showVectors;
+    
+  if (key == 'c' || key == 'C')
+    showCells = !showCells;
   
   if (key == 'r' || key == 'R')
     reset();
