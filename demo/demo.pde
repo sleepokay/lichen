@@ -7,9 +7,10 @@ boolean noDeath = true;
 boolean paused = true;
 boolean wave = false;
 boolean gridlines = false;
+boolean noVec = false;
 
 // growth parameters
-float constrainingAngle = radians(180);
+float constrainingAngle = radians(55);
 float newGrowthPerturbation = (PI/9.0);
 float growthPerturbation = (PI/58.0);
 float excitedNeighborsParameter = 3;
@@ -81,6 +82,7 @@ void draw() {
           rect (x*cellSize, y*cellSize, cellSize, cellSize);
         }
         else if (gridlines) {
+          strokeWeight(1);
           stroke(80);
           fill(0);
           rect (x*cellSize, y*cellSize, cellSize, cellSize);
@@ -94,6 +96,7 @@ void draw() {
     for (int x = 0; x < width/cellSize; x++) {
       for (int y = 0; y < height/cellSize;y++) {
         if (cells[x][y].state > EMPTY) {
+          strokeWeight(2);
           stroke(color(0, 100 * cells[x][y].state / MAXSTATE + 155, 100 * cells[x][y].state / MAXSTATE + 70));
           int xCenter = x*cellSize + cellSize/2;
           int yCenter = y*cellSize + cellSize/2;
@@ -245,6 +248,12 @@ void keyPressed() {
     
   if (key == 'g' || key == 'G')
     gridlines = !gridlines;
+    
+  if (key =='o' || key == 'O')
+    if (constrainingAngle == radians(55))
+      constrainingAngle = radians(180);
+    else
+      constrainingAngle = radians(55);
 }
 
 void wave() {
